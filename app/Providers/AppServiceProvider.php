@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Candidate;
 use Auth;
 use Illuminate\Support\ServiceProvider;
 use Validator;
