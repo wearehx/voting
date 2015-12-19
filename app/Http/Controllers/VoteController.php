@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Auth;
+use Session;
+use App\Vote;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class VoteController extends Controller
+{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('vote.cast')
+            ->withCandidates(nextTerm()->candidates())
+            ->withCount(0);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            "vote" => "array|vote_count|unique_vote|sane_votes"
+        ]);
+        $user = Auth::user();
+        if ($user->uuid === null) {
+            $user->uuid = uuid();
+            $user->save();
+        }
+        foreach ($request->get("vote") as $vote) {
+            Vote::create([
+                "candidate_id" => Candidate::findOrFail($vote)->id,
+                "user_id" => $user->id,
+                "term_id" => nextTerm()->id
+            ]);
+        }
+
+        Session::flash('message', 'Your votes were successfully counted.');
+
+        return redirect("/");
+    }
+}
