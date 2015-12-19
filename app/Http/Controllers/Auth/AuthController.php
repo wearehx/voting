@@ -35,9 +35,9 @@ class AuthController extends Controller
     /**
      * The scopes we request from Facebook.
      *
-     * @var Laravel\Socialite\Contracts\Factory
+     * @var array
      */
-    protected $scopes = ['user_managed_groups', 'user_website', 'email'];
+    protected $scopes = ['email'];
 
     /**
      * Create a new authentication controller instance.
