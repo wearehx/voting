@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use Carbon;
 use App\Term;
+use Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,13 +21,14 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $term = new Term;
+            $term = new Term();
             $date = Carbon::now()->addDays(15);
             $term->starts_at = $date;
             $term->ends_at = $date->addMonths(3);

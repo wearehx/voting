@@ -30,14 +30,15 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('webhook/user', function (Illuminate\Http\Request $request) {
-    if (! hash_equals(Config::get('services.facebook.verify_token'), $request->get('hub_verify_token'))) {
+    if (!hash_equals(Config::get('services.facebook.verify_token'), $request->get('hub_verify_token'))) {
         abort(403);
     }
+
     return e($request->get('hub_challenge'));
 });
 
 Route::post('webhook/user', function (Illuminate\Http\Request $request) {
-    if (! hash_equals(substr($request->header('X-Hub-Signature'), 5), hash_hmac('sha1', $request->getContent(), Config::get('services.facebook.client_secret')))) {
+    if (!hash_equals(substr($request->header('X-Hub-Signature'), 5), hash_hmac('sha1', $request->getContent(), Config::get('services.facebook.client_secret')))) {
         abort(403);
     }
 

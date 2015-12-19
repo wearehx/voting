@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Session;
 use App\Vote;
-use App\Http\Requests;
+use Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Session;
 
 class VoteController extends Controller
 {
@@ -26,29 +24,30 @@ class VoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            "vote" => "array|vote_count|unique_vote|sane_votes"
+            'vote' => 'array|vote_count|unique_vote|sane_votes',
         ]);
         $user = Auth::user();
         if ($user->uuid === null) {
             $user->uuid = uuid();
             $user->save();
         }
-        foreach ($request->get("vote") as $vote) {
+        foreach ($request->get('vote') as $vote) {
             Vote::create([
-                "candidate_id" => Candidate::findOrFail($vote)->id,
-                "user_id" => $user->id,
-                "term_id" => nextTerm()->id
+                'candidate_id' => Candidate::findOrFail($vote)->id,
+                'user_id'      => $user->id,
+                'term_id'      => nextTerm()->id,
             ]);
         }
 
         Session::flash('message', 'Your votes were successfully counted.');
 
-        return redirect("/");
+        return redirect('/');
     }
 }

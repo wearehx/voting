@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,13 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('vote_count', function($attribute, $value, $parameters, $validator) {
-            return count($value) == env("NUM_ADMINS");
+        Validator::extend('vote_count', function ($attribute, $value, $parameters, $validator) {
+            return count($value) == env('NUM_ADMINS');
         });
-        Validator::extend('vote_unique', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('vote_unique', function ($attribute, $value, $parameters, $validator) {
             return Auth::user()->canVote();
         });
-        Validator::extend('sane_votes', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('sane_votes', function ($attribute, $value, $parameters, $validator) {
             $can = [];
             foreach ($value as $candidate) {
                 if (Candidate::findOrFail($candidate)->term_id !== nextTerm()->id || in_array($candidate, $can)) {
@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
                 }
                 $can[] = $candidate;
             }
+
             return true;
         });
     }

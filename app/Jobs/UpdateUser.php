@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\User;
-use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class UpdateUser extends Job implements SelfHandling
@@ -38,7 +37,7 @@ class UpdateUser extends Job implements SelfHandling
     {
         $this->uid = $uid;
         $this->changedFields = $changedFields;
-        $this->user = User::where("facebook_id", $this->uid)->get()->first();
+        $this->user = User::where('facebook_id', $this->uid)->get()->first();
     }
 
     /**
@@ -48,10 +47,11 @@ class UpdateUser extends Job implements SelfHandling
      */
     public function handle(\Facebook\Facebook $fb)
     {
-        $response = $fb->get('/me?fields=' . implode($this->changedFields, ","), $this->user->token)->getGraphUser();
+        $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
         foreach ($response as $field => $value) {
-            if (in_array($field, $this->changedFields))
+            if (in_array($field, $this->changedFields)) {
                 $this->user->{$field} = $value;
+            }
         }
         $this->user->save();
     }

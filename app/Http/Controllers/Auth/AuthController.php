@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
+use App\User;
+use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Laravel\Socialite\Contracts\Factory as Socialite;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -37,7 +37,7 @@ class AuthController extends Controller
      *
      * @var Laravel\Socialite\Contracts\Factory
      */
-    protected $scopes = ["user_managed_groups", "user_website", "email"];
+    protected $scopes = ['user_managed_groups', 'user_website', 'email'];
 
     /**
      * Create a new authentication controller instance.
@@ -53,14 +53,15 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -68,14 +69,15 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
@@ -109,7 +111,7 @@ class AuthController extends Controller
     {
         $user = $this->socialite->with('facebook')->user();
 
-        if (! $this->validateUserFacebookAttributes($user)) {
+        if (!$this->validateUserFacebookAttributes($user)) {
             return $this->getFacebookReSocialAuth();
         }
 
@@ -120,22 +122,23 @@ class AuthController extends Controller
         }
 
         Auth::loginUsingId($dbUser->id);
-        return redirect("/");
+
+        return redirect('/');
     }
 
     protected function validateUserFacebookAttributes($user)
     {
-        return $user->email != null && $user->user["verified"] !== null;
+        return $user->email != null && $user->user['verified'] !== null;
     }
 
     protected function createUserFromSocialite($user)
     {
         return User::create([
-            "name" => $user->name,
-            "email" => $user->email,
-            "token" => $user->token,
-            "facebook_id" => $user->id,
-            "verified" => $user->user["verified"]
+            'name'        => $user->name,
+            'email'       => $user->email,
+            'token'       => $user->token,
+            'facebook_id' => $user->id,
+            'verified'    => $user->user['verified'],
         ]);
     }
 }
