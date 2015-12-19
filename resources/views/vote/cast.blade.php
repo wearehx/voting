@@ -9,7 +9,7 @@
                 <input type="checkbox" id="{{ ++$count }}" name="vote[{{ $candidate->id }}]" value="{{ $candidate->id }}" onclick="changeCheckBox()">
                 {{ $candidate->user()->get()->first()->name }}
             </label><br />
-            <p>{{ $candidate->text }}</p>
+            <p>{{ $candidate->about }}</p>
         </div>
     @endforeach
     {!! csrf_field() !!}
