@@ -103,9 +103,9 @@ class AuthController extends Controller
     }
 
     /**
-     * dd() after processing the social login.
+     * Process the Facebook callback, ensure they gave us the correct permissions, create the user if they don't exist, and log them in.
      *
-     * @return void
+     * @return mixed
      */
     public function getSocialAuthCallback()
     {
