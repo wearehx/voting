@@ -4,15 +4,15 @@ namespace App\Http\Middleware;
 
 use Auth;
 use Closure;
-use App\Nomination;
 
 class CanRun
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -21,6 +21,6 @@ class CanRun
             return $next($request);
         }
 
-        return redirect("/");
+        return redirect('/');
     }
 }

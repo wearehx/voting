@@ -36,14 +36,14 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_id'     => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_APP_SECRET'),
-        'redirect' => env('FACEBOOK_CALLBACK_URL', 'https://fgm.ian.sh/auth/facebook/callback'),
-        'verify_token' => env('FACEBOOK_VERIFY_TOKEN')
+        'redirect'      => env('FACEBOOK_CALLBACK_URL', 'https://fgm.ian.sh/auth/facebook/callback'),
+        'verify_token'  => env('FACEBOOK_VERIFY_TOKEN'),
     ],
 
     'raven' => [
-        'level' => env('RAVEN_LEVEL', 'debug')
+        'level' => env('RAVEN_LEVEL', 'debug'),
     ],
 
 ];

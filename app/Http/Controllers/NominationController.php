@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Session;
 use App\Nomination;
-use App\Http\Requests;
+use Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Session;
 
 class NominationController extends Controller
 {
@@ -24,21 +22,22 @@ class NominationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            "facebook_id" => "required|integer|exists:users,facebook_id"
+            'facebook_id' => 'required|integer|exists:users,facebook_id',
         ]);
         Nomination::create([
-            "facebook_id" => $request->get("facebook_id"),
-            "user_id" => Auth::user()->id,
-            "term_id" => nextTerm()->id
+            'facebook_id' => $request->get('facebook_id'),
+            'user_id'     => Auth::user()->id,
+            'term_id'     => nextTerm()->id,
         ]);
         Session::flash('message', 'You successfully nominated a user.');
 
-        return redirect("/");
+        return redirect('/');
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use App\Term;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 
 class NewTerm extends Command
 {
@@ -30,8 +29,8 @@ class NewTerm extends Command
      */
     public function handle()
     {
-        $date = Carbon::createFromDate($this->argument("year"), $this->argument("month"), $this->argument("day"), 'GMT');
-        $term = new Term;
+        $date = Carbon::createFromDate($this->argument('year'), $this->argument('month'), $this->argument('day'), 'GMT');
+        $term = new Term();
         $term->starts_at = $date;
         $term->ends_at = $date->addMonths(3);
         $term->save();
