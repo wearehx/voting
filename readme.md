@@ -23,6 +23,7 @@ You'll need to set the following environment variables in `.env` if not set in t
 * `FACEBOOK_APP_SECRET`
 * `FACEBOOK_CALLBACK_URL`
 * `FACEBOOK_VERIFY_TOKEN`: The verify token you set when creating the webhook.
+* `NUM_ADMINS`: The number of admins to be elected.
 
 ### Contributing
 You'll need to `npm install` our build dependencies and run `gulp --production` if you modify the SASS stylesheet. Changes can be proposed in a PR with a clear purpose and clear commit messages. Do note that merging into this repository is frozen during elections (two weeks from the next term's start date) except for security and critical bug fixes.
