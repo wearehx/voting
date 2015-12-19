@@ -17,7 +17,7 @@ class VoteController extends Controller
     public function create()
     {
         return view('vote.cast')
-            ->withCandidates(nextTerm()->candidates())
+            ->withCandidates(nextTerm()->candidates()->get())
             ->withCount(0);
     }
 
