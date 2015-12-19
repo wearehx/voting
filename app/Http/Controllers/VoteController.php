@@ -31,7 +31,7 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'vote' => 'array|vote_count|unique_vote|sane_votes',
+            'vote' => 'required|array|vote_count|unique_vote|sane_votes',
         ]);
         $user = Auth::user();
         if ($user->uuid === null) {
