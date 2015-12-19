@@ -7,7 +7,7 @@
         <div class="form-checkbox">
             <label>
                 <input type="checkbox" id="{{ ++$count }}" name="vote[{{ $candidate->id }}]" value="{{ $candidate->id }}" onclick="changeCheckBox()">
-                {{ $candidate->user()->get()->name }}
+                {{ $candidate->user()->get()->first()->name }}
             </label><br />
             <p>{{ $candidate->text }}</p>
         </div>
