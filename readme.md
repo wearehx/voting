@@ -15,7 +15,7 @@ php artisan migrate
 php artisan serve
 ```
 #### Facebook Login
-The application authenticates users via Facebook Login. You'll need to create an application and set the appropriate values. Additionally, you should setup a webhook to `{url}/webhook/user` on `name` and `email` changes. Set the verify token you define in `FACEBOOK_VERIFY_TOKEN`.
+The application authenticates users via Facebook Login. You'll need to create an application and set the appropriate values. Additionally, you should setup a webhook to `{url}/webhook/user` on `name` and `email` changes. Set the verify token you define in `FACEBOOK_VERIFY_TOKEN`. You also need to ensure your callback URL (`{url}/auth/facebook/callback`) is whitelisted for your application.
 
 #### Environment Variables
 You'll need to set the following environment variables in `.env` if not set in the web server's environment:
