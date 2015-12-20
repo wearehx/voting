@@ -9,7 +9,6 @@
         "laravel/framework": "5.1.*",
         "laravel/socialite": "^2.0",
         "facebook/php-sdk-v4": "^5.1",
-        "jenssegers/raven": "^1.4",
         "doctrine/dbal": "^2.5",
         "ramsey/uuid": "^3.0"
     },
