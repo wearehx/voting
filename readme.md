@@ -19,9 +19,10 @@ The application authenticates users via Facebook Login. You'll need to create an
 
 #### Environment Variables
 You'll need to set the following environment variables in `.env` if not set in the web server's environment:
+* `APP_KEY`: A random, 32 character string you can generate with `php artisan app:key`.
 * `FACEBOOK_APP_ID`
 * `FACEBOOK_APP_SECRET`
-* `FACEBOOK_CALLBACK_URL`
+* `FACEBOOK_CALLBACK_URL`: The URL of your application, followed by `/auth/facebook/callback` (ex. `https://test.ian.sh/auth/facebook/callback`).
 * `FACEBOOK_VERIFY_TOKEN`: The verify token you set when creating the webhook.
 * `NUM_ADMINS`: The number of admins to be elected.
 
