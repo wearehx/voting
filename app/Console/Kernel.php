@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
             $term = new Term();
             $date = Carbon::now()->addDays(15);
             $term->starts_at = $date;
-            $term->ends_at = $date->addMonths(3);
+            $term->ends_at = $date->addMonths(3)->subDays(1);
             $term->save();
         })->daily()->when(function () {
             return term()->ends_at->diffInDays() == 15 && nextTerm() === null;

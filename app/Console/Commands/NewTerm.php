@@ -32,7 +32,7 @@ class NewTerm extends Command
         $date = Carbon::createFromDate($this->argument('year'), $this->argument('month'), $this->argument('day'), 'GMT');
         $term = new Term();
         $term->starts_at = $date;
-        $term->ends_at = $date->addMonths(3);
+        $term->ends_at = $date->addMonths(3)->subDays(1);
         $term->save();
         $this->info('Term created successfully.');
     }
