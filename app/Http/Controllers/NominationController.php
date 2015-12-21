@@ -31,6 +31,13 @@ class NominationController extends Controller
         $this->validate($request, [
             'facebook_id' => 'required|integer|exists:users,facebook_id',
         ]);
+        if (Nomination::where([
+            'facebook_id' => $request->get('facebook_id'),
+            'term_id' => nextTerm()->id
+        ])->count() > 2) {
+            Session::flash('message', 'That user already has enough nominations.');
+            return redirect('/nominate');
+        }
         Nomination::create([
             'facebook_id' => $request->get('facebook_id'),
             'user_id'     => Auth::user()->id,
