@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('candidacy', ['middleware' => 'be_nominated', 'uses' => 'CandidacyController@create']);
     Route::post('candidacy', ['middleware' => ['be_nominated', 'run'], 'uses' => 'CandidacyController@store']);
+
+    Route::controller('data', 'DataController');
 });
 
 Route::get('webhook/user', function (Illuminate\Http\Request $request) {
