@@ -15,7 +15,7 @@ class CanVoteOrNominate
      */
     public function handle($request, Closure $next)
     {
-        if (canVote() || canNominate()) {
+        if (canVote(false) || canNominate(false)) {
             return $next($request);
         }
 
