@@ -12,6 +12,6 @@ class DataController extends Controller
     public function getUsers()
     {
         return view('data.users')
-            ->withUsers(User::all()->orderBy('name', 'asc'));
+            ->withUsers(User::orderBy('name', 'asc')->get());
     }
 }
