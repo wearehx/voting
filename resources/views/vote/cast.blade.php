@@ -2,6 +2,17 @@
 
 @section("content")
 <p style="margin-top:0">Select <b>{{ env("NUM_ADMINS") }}</b> candidates and click "Finalize" to submit your vote(s).</p>
+
+@if(!canVote(false))
+<div class="flash flash-error">
+    Since voting has not started, you can only view this page.
+</div>
+@elseif(!canVote())
+<div class="flash flash-error">
+    Since you have already voted, you can only view this page.
+</div>
+@endif
+
 <form name="vote" method="post">
     @foreach ($candidates as $candidate)
         <div class="form-checkbox">
