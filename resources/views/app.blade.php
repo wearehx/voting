@@ -35,7 +35,7 @@
                             <a class="menu-item" href="/vote" @if(! canVote()) disabled @endif><span class="octicon octicon-broadcast"></span> Vote</a>
                             <a class="menu-item" href="/nominate" @if(! canNominate()) disabled @endif><span class="octicon octicon-thumbsup"></span> Nominate</a>
                             <a class="menu-item" href="/candidacy" @if(! canNominate(false)) disabled @endif><span class="octicon octicon-person"></span> Candidacy</a>
-                            <a class="menu-item" href="/data/users"><span class="octicon octicon-person"></span> Users</a>
+                            <a class="menu-item" href="/data/users"><span class="octicon octicon-organization"></span> Users</a>
                             @if(Auth::check()) <a class="menu-item" href="/logout"><span class="octicon octicon-lock"></span> Logout</a> @endif
                         </nav>
                     </div>
