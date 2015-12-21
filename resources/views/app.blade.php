@@ -32,7 +32,7 @@
                     <div class="one-fifth column">
                         <nav class="menu">
                             <a class="menu-item" href="/"><span class="octicon octicon-radio-tower"></span> Home</a>
-                            <a class="menu-item" href="/vote" @if(! canVote()) disabled @endif><span class="octicon octicon-broadcast"></span> Vote</a>
+                            <a class="menu-item" href="/vote" @if(! canVote() && ! canNominate()) disabled @endif><span class="octicon octicon-broadcast"></span> Vote</a>
                             <a class="menu-item" href="/nominate" @if(! canNominate()) disabled @endif><span class="octicon octicon-thumbsup"></span> Nominate</a>
                             <a class="menu-item" href="/candidacy" @if(! canNominate(false)) disabled @endif><span class="octicon octicon-person"></span> Candidacy</a>
                             <a class="menu-item" href="/data/users"><span class="octicon octicon-organization"></span> Users</a>
