@@ -13,7 +13,7 @@
         </div>
     @endforeach
     {!! csrf_field() !!}
-    <button type="submit" class="btn btn-danger">Finalize</button>
+    <button type="submit" class="btn btn-danger" @if(!canVote()) disabled @endif>Finalize</button>
 </form>
 <script>
 var ready = (function(){

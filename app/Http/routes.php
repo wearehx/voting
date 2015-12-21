@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
         Auth::logout();
     });
 
-    Route::get('vote', ['middleware' => 'vote', 'uses' => 'VoteController@create']);
+    Route::get('vote', ['middleware' => 'nominate_or_vote', 'uses' => 'VoteController@create']);
     Route::post('vote', ['middleware' => 'vote', 'uses' => 'VoteController@store']);
 
     Route::get('nominate', ['middleware' => 'nominate', 'uses' => 'NominationController@create']);
