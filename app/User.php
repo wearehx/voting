@@ -68,7 +68,7 @@ AuthenticatableContract,
         return Nomination::where([
             'facebook_id' => $this->facebook_id,
             'term_id'     => nextTerm()->id,
-        ])->count() > 2 && !$this->candidates()->where('term_id', nextTerm()->id)->count();
+        ])->count() > 1 && !$this->candidates()->where('term_id', nextTerm()->id)->count();
     }
 
     public function isRunning()
