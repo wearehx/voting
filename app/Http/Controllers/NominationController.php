@@ -34,7 +34,7 @@ class NominationController extends Controller
         if (Nomination::where([
             'facebook_id' => $request->get('facebook_id'),
             'term_id' => nextTerm()->id,
-        ])->count() > 2) {
+        ])->count() > 1) {
             Session::flash('message', 'That user already has enough nominations.');
 
             return redirect('/nominate');
