@@ -60,7 +60,7 @@ AuthenticatableContract,
 
     public function canNominate()
     {
-        return $this->nominations()->where('term_id', nextTerm()->id)->get()->count() < env('NUM_NOMINATIONS', 2);
+        return $this->nominations()->where('term_id', nextTerm()->id)->get()->count() < env('NUM_ADMINS');
     }
 
     public function canRun()
