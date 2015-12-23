@@ -6,3 +6,4 @@
 * Send an email when a user becomes eligible to run.
 * Show how many more nominations a user needs to run.
 * Better setup documentation (Heroku Button?)  
+* Security Review | SCKelemen
