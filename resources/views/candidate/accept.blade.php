@@ -1,7 +1,7 @@
 @extends("app")
 
 @section("content")
-<p>You've been nominated by three people to run as a moderator for the next term. There is no cost for or limitation on running; if you lose, you can run in the next election with no penalties. If you don't want to run, you don't need to take any further action.</p>
+<p>You've been nominated by two people to run as a moderator for the next term. There is no cost for or limitation on running; if you lose, you can run in the next election with no penalties. If you don't want to run, you don't need to take any further action.</p>
 <form method="post">
     <div class="form-checkbox">
         <label>
