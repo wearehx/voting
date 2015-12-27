@@ -17,8 +17,10 @@ class VoteController extends Controller
      */
     public function create()
     {
+        $candidates = nextTerm()->candidates()->get()->all();
+        shuffle($candidates);
         return view('vote.cast')
-            ->withCandidates(nextTerm()->candidates()->get())
+            ->withCandidates($candidates)
             ->withCount(0);
     }
 
