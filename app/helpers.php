@@ -3,7 +3,7 @@
 function canNominate($checkUser = true)
 {
     try {
-        return Carbon\Carbon::now()->between(nextTerm()->starts_at->subDays(14), nextTerm()->starts_at->subDays(6)) && (Auth::check() && $checkUser ? Auth::user()->canNominate() : true);
+        return Carbon\Carbon::now()->between(nextTerm()->starts_at->subDays(14), nextTerm()->starts_at->subDays(7)) && (Auth::check() && $checkUser ? Auth::user()->canNominate() : true);
     } catch (Exception $e) {
         return false;
     }
