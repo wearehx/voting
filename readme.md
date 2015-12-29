@@ -3,7 +3,7 @@
 
 The voting application for Hackers, built using PHP 7, Laravel 5.1, and PostgreSQL.
 
-**Warning:** This code has not been reviewed by anyone. It has no unit tests (yet), and has not been deployed to production (yet).
+**Warning:** This code has not been reviewed by anyone. It has no unit tests (yet).
 
 ### Setup
 You'll need Composer to get started. Once you have that, it's a matter of cloning the repository, installing the dependencies, and setting up the database.
