@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "name": "wearehx/voting",
+    "description": "A voting application for Hackers.",
+    "keywords": ["voting", "laravel"],
+    "license": "apache2",
     "type": "project",
     "require": {
         "php": ">= 5.6",
