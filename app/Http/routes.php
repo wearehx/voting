@@ -43,7 +43,7 @@ Route::post('webhook/user', function (Illuminate\Http\Request $request) {
     }
 
     foreach ($request->json('entry') as $entry) {
-        app('Illuminate\Bus\Dispatcher')->dispatch(new App\Jobs\UpdateUser($entry['uid'], $entry['changed_fields']));
+        dispatch(new App\Jobs\UpdateUser($entry['uid'], $entry['changed_fields']));
     }
 });
 
