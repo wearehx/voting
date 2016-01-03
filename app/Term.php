@@ -15,6 +15,11 @@ class Term extends Model
         return $this->hasMany("App\Candidate");
     }
 
+    public function votes()
+    {
+        return $this->hasMany("App\Vote");
+    }
+
     public function scopeActive($query)
     {
         return $query->where('starts_at', '<=', Carbon::now())
