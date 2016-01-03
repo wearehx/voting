@@ -27,22 +27,24 @@ class DataController extends Controller
     public function getVotes()
     {
         $terms = [];
-        foreach (Term::past()->get() as $term) {
+        Term::past()->get()->each(function ($term) use (&$terms) {
             $candidates = [];
-            foreach ($term->candidates()->get() as $candidate) {
+            $term->candidates()->get()->each(function ($candidate) use (&$candidates) {
                 $candidates[] = [
                     "id" => $candidate->id,
                     "user_id" => $candidate->user()->id,
                     "name" => $candidate->user()->name,
                 ];
-            }
+            });
+
             $votes = [];
-            foreach ($term->votes()->get() as $vote) {
+            $term->votes()->get()->each(function ($vote) use (&$votes) {
                 $votes[] = [
                     "candidate_id" => $vote->candidate()->id,
                     "uuid" => $vote->user()->uuid,
                 ];
-            }
+            });
+
             $terms[] = [
                 "id" => $term,
                 "start" => $term->starts_at->toDateString(),
@@ -50,7 +52,8 @@ class DataController extends Controller
                 "candidates" => $candidates,
                 "votes" => $votes,
             ];
-        }
+        });
+        
         return response()->json([
             "terms" => $terms
         ]);
