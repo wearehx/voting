@@ -27,8 +27,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('candidacy', ['middleware' => 'be_nominated', 'uses' => 'CandidacyController@create']);
     Route::post('candidacy', ['middleware' => ['be_nominated', 'run'], 'uses' => 'CandidacyController@store']);
-
-    Route::controller('data', 'DataController');
 });
 
 Route::get('webhook/user', function (Illuminate\Http\Request $request) {
@@ -51,6 +49,8 @@ Route::post('webhook/user', function (Illuminate\Http\Request $request) {
 
 Route::get('auth/facebook', 'Auth\AuthController@getFacebookSocialAuth');
 Route::get('auth/facebook/callback', 'Auth\AuthController@getSocialAuthCallback');
+
+Route::controller('data', 'DataController');
 
 Route::get('legal/pp', function () {
     return view('legal.pp');
