@@ -27,4 +27,10 @@ class Term extends Model
         return $query->where('starts_at', '>', Carbon::now())
             ->orderBy('starts_at', 'asc');
     }
+
+    public function scopePast($query)
+    {
+        return $query->where('starts_at', '<=', Carbon::now())
+            ->orderBy('starts_at', 'asc');
+    }
 }
