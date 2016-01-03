@@ -40,6 +40,7 @@ class DataController extends Controller
             $votes = [];
             $term->votes()->get()->each(function ($vote) use (&$votes) {
                 $votes[] = [
+                    "id" => $vote->id,
                     "candidate_id" => $vote->candidate()->id,
                     "uuid" => $vote->user()->uuid,
                 ];
