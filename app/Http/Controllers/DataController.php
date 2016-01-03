@@ -31,32 +31,32 @@ class DataController extends Controller
             $candidates = [];
             $term->candidates()->get()->each(function ($candidate) use (&$candidates) {
                 $candidates[] = [
-                    "id" => $candidate->id,
-                    "user_id" => $candidate->user()->id,
-                    "name" => $candidate->user()->name,
+                    'id'      => $candidate->id,
+                    'user_id' => $candidate->user()->id,
+                    'name'    => $candidate->user()->name,
                 ];
             });
 
             $votes = [];
             $term->votes()->get()->each(function ($vote) use (&$votes) {
                 $votes[] = [
-                    "id" => $vote->id,
-                    "candidate_id" => $vote->candidate()->id,
-                    "uuid" => $vote->user()->uuid,
+                    'id'           => $vote->id,
+                    'candidate_id' => $vote->candidate()->id,
+                    'uuid'         => $vote->user()->uuid,
                 ];
             });
 
             $terms[] = [
-                "id" => $term,
-                "start" => $term->starts_at->toDateString(),
-                "end" => $term->ends_at->toDateString(),
-                "candidates" => $candidates,
-                "votes" => $votes,
+                'id'         => $term,
+                'start'      => $term->starts_at->toDateString(),
+                'end'        => $term->ends_at->toDateString(),
+                'candidates' => $candidates,
+                'votes'      => $votes,
             ];
         });
-        
+
         return response()->json([
-            "terms" => $terms
+            'terms' => $terms,
         ]);
     }
 }
