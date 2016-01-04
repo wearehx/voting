@@ -41,8 +41,8 @@ class DataController extends Controller
             $term->votes()->get()->each(function ($vote) use (&$votes) {
                 $votes[] = [
                     'id'           => $vote->id,
-                    'candidate_id' => $vote->candidate()->get()->id,
-                    'uuid'         => $vote->user()->get()->uuid,
+                    'candidate_id' => $vote->candidate()->get()->first()->id,
+                    'uuid'         => $vote->user()->get()->first()->uuid,
                 ];
             });
 
