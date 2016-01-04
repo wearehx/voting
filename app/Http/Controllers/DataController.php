@@ -32,8 +32,8 @@ class DataController extends Controller
             $term->candidates()->get()->each(function ($candidate) use (&$candidates) {
                 $candidates[] = [
                     'id'      => $candidate->id,
-                    'user_id' => $candidate->user()->get()->id,
-                    'name'    => $candidate->user()->get()->name,
+                    'user_id' => $candidate->user()->get()->first()->id,
+                    'name'    => $candidate->user()->get()->first()->name,
                 ];
             });
 
