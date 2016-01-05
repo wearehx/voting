@@ -64,7 +64,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             User::notifyNominating()->get()->each(function ($user) {
-                $user->notify("You can now nominate three people to run for an admin position.");
+                $user->notify('You can now nominate three people to run for an admin position.');
             });
         })->hourly()->when(function () {
             return canNominate();
@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             User::notifyVoting()->get()->each(function ($user) {
-                $user->notify("You can now vote in the HX admin election.");
+                $user->notify('You can now vote in the HX admin election.');
             });
         })->hourly()->when(function () {
             return canVote();

@@ -44,7 +44,7 @@ AuthenticatableContract,
      */
     public function nominations()
     {
-        return $this->hasMany("App\Nomination");
+        return $this->hasMany('App\Nomination');
     }
 
     /**
@@ -52,7 +52,7 @@ AuthenticatableContract,
      */
     public function candidates()
     {
-        return $this->hasMany("App\Candidate");
+        return $this->hasMany('App\Candidate');
     }
 
     /**
@@ -60,7 +60,7 @@ AuthenticatableContract,
      */
     public function votes()
     {
-        return $this->hasMany("App\Vote");
+        return $this->hasMany('App\Vote');
     }
 
     /**
@@ -100,6 +100,7 @@ AuthenticatableContract,
 
     /**
      * @param $query
+     * 
      * @return mixed
      */
     public function scopeNotifyRunning($query)
@@ -109,6 +110,7 @@ AuthenticatableContract,
 
     /**
      * @param $query
+     *
      * @return mixed
      */
     public function scopeNotifyNominating($query)
@@ -118,6 +120,7 @@ AuthenticatableContract,
 
     /**
      * @param $query
+     *
      * @return mixed
      */
     public function scopeNotifyVoting($query)
@@ -129,13 +132,14 @@ AuthenticatableContract,
      * Send a notification to the user's Facebook account.
      *
      * @param $message
+     *
      * @return \Facebook\FacebookResponse
      */
     public function notify($message)
     {
-        return (new Facebook)->post($this->facebook_id . "/notifications", [
-            "href" => "candidacy",
-            "template" => $message,
+        return (new Facebook)->post($this->facebook_id.'/notifications', [
+            'href' => 'candidacy',
+            'template' => $message,
         ]);
     }
 

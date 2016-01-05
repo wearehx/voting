@@ -38,7 +38,7 @@ class NotificationController extends Controller
     public function postConfigure(Request $request)
     {
         $this->user->update($this->processConfigureRequest($request));
-        $this->success("Your notification preferences were successfully updated.");
+        $this->success('Your notification preferences were successfully updated.');
         return redirect('/notification/configure');
     }
 

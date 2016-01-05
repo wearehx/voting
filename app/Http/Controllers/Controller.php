@@ -19,7 +19,7 @@ abstract class Controller extends BaseController
      */
     protected function success($message)
     {
-        Session::flash("message", $message);
+        Session::flash('message', $message);
     }
 
     /**
@@ -29,6 +29,6 @@ abstract class Controller extends BaseController
      */
     protected function failure($message)
     {
-        Session::flash("message", $message);
+        Session::flash('message', $message);
     }
 }
