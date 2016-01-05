@@ -138,7 +138,7 @@ AuthenticatableContract,
     public function notify($message)
     {
         return (new Facebook())->post($this->facebook_id.'/notifications', [
-            'href' => 'candidacy',
+            'href'     => 'candidacy',
             'template' => $message,
         ]);
     }
