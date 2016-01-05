@@ -142,5 +142,4 @@ AuthenticatableContract,
             'template' => $message,
         ]);
     }
-
 }
