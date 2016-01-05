@@ -30,6 +30,7 @@
                     <div class="one-fifth column">
                         <nav class="menu">
                             <a class="menu-item" href="/"><span class="octicon octicon-radio-tower"></span> Home</a>
+                            <a class="menu-item" href="/notification/configure"><span class="octicon octicon-comment"></span> Notifications</a>
                             <a class="menu-item" href="/vote" @if(! canVote(false) && ! canNominate(false)) disabled @endif><span class="octicon octicon-broadcast"></span> Vote</a>
                             <a class="menu-item" href="/nominate" @if(! canNominate()) disabled @endif><span class="octicon octicon-thumbsup"></span> Nominate</a>
                             <a class="menu-item" href="/candidacy" @if(! canNominate(false)) disabled @endif><span class="octicon octicon-person"></span> Candidacy</a>
