@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Term;
 use App\User;
 use Carbon;
+use Facebook\Facebook;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
