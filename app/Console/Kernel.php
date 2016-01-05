@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Term;
+use App\User;
 use Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -38,8 +39,8 @@ class Kernel extends ConsoleKernel
         });
 
         $schedule->call(function () {
-            $fb = new Facebook\Facebook();
-            $users = App\User::all();
+            $fb = new Facebook();
+            $users = User::all();
             $uids = [];
             $edge = $fb->get('/1659221770989008/members?limit=999999999999&fields=id', User::where('facebook_id', env('MAINTAINER_UID', 10153385491939685)->first()->token()))->getGraphEdge();
             foreach ($edge as $node) {
@@ -51,5 +52,29 @@ class Kernel extends ConsoleKernel
                 $user->save();
             }
         })->daily();
+
+        $schedule->call(function () {
+            User::notifyRunning()->get()->each(function ($user) {
+                $user->notify("You've been nominated by two people to run for an admin position.");
+            });
+        })->hourly()->when(function () {
+            return canNominate();
+        });
+
+        $schedule->call(function () {
+            User::notifyNominating()->get()->each(function ($user) {
+                $user->notify("You can now nominate three people to run for an admin position.");
+            });
+        })->hourly()->when(function () {
+            return canNominate();
+        });
+
+        $schedule->call(function () {
+            User::notifyVoting()->get()->each(function ($user) {
+                $user->notify("You can now vote in the HX admin election.");
+            });
+        })->hourly()->when(function () {
+            return canVote();
+        });
     }
 }
