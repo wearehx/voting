@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Notification;
+use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
@@ -33,6 +30,7 @@ class NotificationController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return Redirect
      */
     public function postConfigure(Request $request)
@@ -44,14 +42,15 @@ class NotificationController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return array
      */
     protected function processConfigureRequest(Request $request)
     {
         return [
-            'should_notify_about_running' => $request->get('should_notify_about_running') == 'on' ? true : false,
+            'should_notify_about_running'    => $request->get('should_notify_about_running') == 'on' ? true : false,
             'should_notify_about_nominating' => $request->get('should_notify_about_nominating') == 'on' ? true : false,
-            'should_notify_about_voting' => $request->get('should_notify_about_voting') == 'on' ? true : false,
+            'should_notify_about_voting'     => $request->get('should_notify_about_voting') == 'on' ? true : false,
         ];
     }
 }

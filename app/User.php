@@ -100,7 +100,7 @@ AuthenticatableContract,
 
     /**
      * @param $query
-     * 
+     *
      * @return mixed
      */
     public function scopeNotifyRunning($query)
@@ -137,7 +137,7 @@ AuthenticatableContract,
      */
     public function notify($message)
     {
-        return (new Facebook)->post($this->facebook_id.'/notifications', [
+        return (new Facebook())->post($this->facebook_id.'/notifications', [
             'href' => 'candidacy',
             'template' => $message,
         ]);
