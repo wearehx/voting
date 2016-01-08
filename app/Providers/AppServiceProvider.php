@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('vote_count', function ($attribute, $value, $parameters, $validator) {
-            return count($value) == env('NUM_ADMINS');
+            return count($value) <= env('NUM_ADMINS') && count($value) > 0;
         });
         Validator::extend('vote_unique', function ($attribute, $value, $parameters, $validator) {
             return Auth::user()->canVote();
