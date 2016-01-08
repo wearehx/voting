@@ -26,13 +26,13 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'             => \App\Http\Middleware\Authenticate::class,
-        'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest'            => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'vote'             => \App\Http\Middleware\CanVote::class,
-        'nominate'         => \App\Http\Middleware\CanNominate::class,
-        'nominate_or_vote' => \App\Http\Middleware\CanVoteOrNominate::class,
-        'be_nominated'     => \App\Http\Middleware\CanBeNominated::class,
-        'run'              => \App\Http\Middleware\CanRun::class,
+        'auth'                    => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'              => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest'                   => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'vote'                    => \App\Http\Middleware\CanVote::class,
+        'nominate'                => \App\Http\Middleware\CanNominate::class,
+        'nominate_or_vote'        => \App\Http\Middleware\CanVoteOrNominate::class,
+        'be_nominated'            => \App\Http\Middleware\CanBeNominated::class,
+        'run'                     => \App\Http\Middleware\CanRun::class,
     ];
 }
