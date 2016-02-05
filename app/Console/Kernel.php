@@ -39,17 +39,17 @@ class Kernel extends ConsoleKernel
             return term()->ends_at->diffInDays() == 15 && nextTerm() === null;
         });
 
-        $schedule->call(function ($uids = []) {
+        $schedule->call(function ($members = []) {
             $fb = new Facebook();
             $users = User::all();
             $edge = $fb->get('/1659221770989008/members?limit=999999999999&fields=id', User::where('facebook_id', env('MAINTAINER_UID', 10153385491939685)->first()->token()))->getGraphEdge();
             foreach ($edge as $node) {
-                $uids[] = $node['id'];
+                $members[] = $node['id'];
             }
 
             foreach ($users as $user) {
                 $user->update([
-                    'can_vote' => in_array($user->facebook_id, $uids) ? true : false,
+                    'can_vote' => in_array($user->facebook_id, $members) ? true : false,
                 ]);
             }
         })->daily();
