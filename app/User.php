@@ -29,7 +29,7 @@ AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'token', 'facebook_id', 'verified'];
+    protected $fillable = ['name', 'email', 'token', 'facebook_id', 'verified', 'can_vote'];
 
     /**
      * The attributes excluded from the model's JSON form.
