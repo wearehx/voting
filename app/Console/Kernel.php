@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Term;
 use Carbon;
+use Facebook\Facebook;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -38,7 +39,7 @@ class Kernel extends ConsoleKernel
         });
 
         $schedule->call(function () {
-            $fb = new Facebook\Facebook();
+            $fb = new Facebook();
             $users = App\User::all();
             $uids = [];
             $edge = $fb->get('/1659221770989008/members?limit=999999999999&fields=id', User::where('facebook_id', env('MAINTAINER_UID', 10153385491939685)->first()->token()))->getGraphEdge();
