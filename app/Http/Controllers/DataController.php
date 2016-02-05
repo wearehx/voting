@@ -24,34 +24,15 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getVotes()
+    public function getVotes($terms = [])
     {
-        $terms = [];
-        Term::past()->get()->each(function ($term) use (&$terms) {
-            $candidates = [];
-            $term->candidates()->get()->each(function ($candidate) use (&$candidates) {
-                $candidates[] = [
-                    'id'      => $candidate->id,
-                    'user_id' => $candidate->user()->get()->first()->id,
-                    'name'    => $candidate->user()->get()->first()->name,
-                ];
-            });
-
-            $votes = [];
-            $term->votes()->get()->each(function ($vote) use (&$votes) {
-                $votes[] = [
-                    'id'           => $vote->id,
-                    'candidate_id' => $vote->candidate()->get()->first()->id,
-                    'uuid'         => $vote->user()->get()->first()->uuid,
-                ];
-            });
-
+        Term::past()->get()->each(function ($term, $candidates = [], $votes = []) use (&$terms) {
             $terms[] = [
                 'id'         => $term,
                 'start'      => $term->starts_at->toDateString(),
                 'end'        => $term->ends_at->toDateString(),
-                'candidates' => $candidates,
-                'votes'      => $votes,
+                'candidates' => $term->candidates()->select(['id', 'user_id', 'name'])->get(),
+                'votes'      => $term->votes()->select(['id', 'candidate_id', 'uuid'])->get(),
             ];
         });
 
