@@ -17,8 +17,7 @@ class VoteController extends Controller
      */
     public function create()
     {
-        $candidates = nextTerm()->candidates()->get()->all();
-        shuffle($candidates);
+        $candidates = $this->shuffle(nextTerm()->candidates()->get()->all());
 
         return view('vote.cast')
             ->withCandidates($candidates)
@@ -37,11 +36,15 @@ class VoteController extends Controller
         $this->validate($request, [
             'vote' => 'required|array|vote_count|vote_unique|sane_votes',
         ]);
-        $user = Auth::user();
+        
+        $user = $request->user();
+        
         if ($user->uuid === null) {
-            $user->uuid = uuid();
-            $user->save();
+            $user->update([
+                'uuid' => uuid(),
+            ]);
         }
+        
         foreach ($request->get('vote') as $vote) {
             Vote::create([
                 'candidate_id' => Candidate::findOrFail($vote)->id,
@@ -53,5 +56,33 @@ class VoteController extends Controller
         Session::flash('message', 'Your votes were successfully counted.');
 
         return redirect('/');
+    }
+    
+    /**
+     * Randomize the given array.
+     *
+     * @param array $candidates
+     *
+     * @return array
+     */
+    protected function shuffle(array $candidates)
+    {
+        /* A list of numbers we've already generated, so that we don't overwrite existing elements. */
+        $used = [];
+        /* A list of candidates that have been randomly distributed. */
+        $result = [];
+        
+        while (count($result) < count($candidates)) {
+            /* Retrieve a zero-indexed number to pull from our list of candidates. */ 
+            $int = random_int(0, count($candidates) - 1);
+            
+            /* Don't duplicate candidates. */
+            if (! isset($used[$int])) {
+                $result[]   = $candidates[$int];
+                $used[$int] = true;
+            }
+        }
+        
+        return $result;
     }
 }
