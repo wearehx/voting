@@ -26,7 +26,7 @@ class DataController extends Controller
      */
     public function getVotes($terms = [])
     {
-        Term::past()->get()->each(function ($term, $candidates = [], $votes = []) use (&$terms) {
+        Term::past()->get()->each(function ($term) use (&$terms) {
             $terms[] = [
                 'id'         => $term,
                 'start'      => $term->starts_at->toDateString(),
