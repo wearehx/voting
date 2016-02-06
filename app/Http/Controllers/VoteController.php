@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Candidate;
 use App\Vote;
-use Auth;
 use Illuminate\Http\Request;
 use Session;
 
@@ -71,18 +70,18 @@ class VoteController extends Controller
         $used = [];
         /* A list of candidates that have been randomly distributed. */
         $result = [];
-        
+
         while (count($result) < count($candidates)) {
             /* Retrieve a zero-indexed number to pull from our list of candidates. */ 
             $int = random_int(0, count($candidates) - 1);
-            
+
             /* Don't duplicate candidates. */
-            if (! isset($used[$int])) {
-                $result[]   = $candidates[$int];
+            if (!isset($used[$int])) {
+                $result[] = $candidates[$int];
                 $used[$int] = true;
             }
         }
-        
+
         return $result;
     }
 }
