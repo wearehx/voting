@@ -16,8 +16,10 @@ class VoteController extends Controller
      */
     public function create()
     {
-        $candidates = $this->shuffle(nextTerm()->candidates()->get()->all());
+        $candidates = nextTerm()->candidates()->get()->all();
 
+        $this->shuffle($candidates);
+        
         return view('vote.cast')
             ->withCandidates($candidates)
             ->withCount(0);
@@ -64,24 +66,20 @@ class VoteController extends Controller
      *
      * @return array
      */
-    protected function shuffle(array $candidates)
+    protected function shuffle(array &$candidates)
     {
-        /* A list of numbers we've already generated, so that we don't overwrite existing elements. */
-        $used = [];
-        /* A list of candidates that have been randomly distributed. */
-        $result = [];
-
-        while (count($result) < count($candidates)) {
-            /* Retrieve a zero-indexed number to pull from our list of candidates. */ 
-            $int = random_int(0, count($candidates) - 1);
-
-            /* Don't duplicate candidates. */
-            if (!isset($used[$int])) {
-                $result[] = $candidates[$int];
-                $used[$int] = true;
-            }
+        for ($index = count($candidates) - 1; $index > 0; $index--) {
+            /* Pick a random number within the untouched bounds of the array. */
+            $int = random_int(0, $index);
+            
+            /* Set $old to the current $index. */
+            $old = $candidates[$index];
+            
+            /* Set $candidates[$index] to a random value from $items that has an index of < $index. */
+            $candidates[$index] = $candidates[$int];
+            
+            /* Set the randomized key's value ($candidates[$int]) to the old value from the iterated index ($index). */
+            $candidates[$int] = $old;
         }
-
-        return $result;
     }
 }
