@@ -51,7 +51,3 @@ Route::get('auth/facebook', 'Auth\AuthController@getFacebookSocialAuth');
 Route::get('auth/facebook/callback', 'Auth\AuthController@getSocialAuthCallback');
 
 Route::controller('data', 'DataController');
-
-Route::get('legal/pp', function () {
-    return view('legal.pp');
-});

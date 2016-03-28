@@ -75,4 +75,9 @@ AuthenticatableContract,
     {
         return (bool) $this->candidates()->where('term_id', nextTerm()->id)->get()->count();
     }
+
+    public function notify(string $type): bool
+    {
+        return is_array($this->notifications) ? in_array($type, $this->notifications) : true;
+    }
 }
