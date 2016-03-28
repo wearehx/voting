@@ -37,7 +37,10 @@ class NotificationController extends Controller
      */
     public function postConfigure(Request $request)
     {
-        $this->user->update($this->processConfigureRequest($request));
+        $this->user->update([
+            'notifications' => $this->processConfigureRequest($request),
+        ]);
+
         $this->success('Your notification preferences were successfully updated.');
 
         return redirect('/notification/configure');
@@ -50,9 +53,9 @@ class NotificationController extends Controller
     protected function processConfigureRequest(Request $request)
     {
         return [
-            'should_notify_about_running' => $request->get('should_notify_about_running') == 'on' ? true : false,
-            'should_notify_about_nominating' => $request->get('should_notify_about_nominating') == 'on' ? true : false,
-            'should_notify_about_voting' => $request->get('should_notify_about_voting') == 'on' ? true : false,
+            'running' => $request->get('running') == 'on' ? true : false,
+            'nominating' => $request->get('nominating') == 'on' ? true : false,
+            'voting' => $request->get('voting') == 'on' ? true : false,
         ];
     }
 }
