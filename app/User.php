@@ -38,6 +38,15 @@ AuthenticatableContract,
      */
     protected $hidden = ['token', 'remember_token'];
 
+    /**
+    * The attributes that should be casted to native types.
+    *
+    * @var array
+    */
+    protected $casts = [
+        'notifications' => 'array',
+    ];
+
     public function nominations()
     {
         return $this->hasMany("App\Nomination");
