@@ -37,7 +37,9 @@ class NotifyAll extends Command
         $fb = new Facebook();
 
         foreach ($users as $user) {
-            $fb->post("/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message], $user->token);
+            try {
+                $fb->post("/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message], $user->token);
+            } catch (\Facebook\Exceptions\FacebookResponseException $e) {}
         }
     }
 }
