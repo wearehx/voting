@@ -40,7 +40,7 @@ class NotifyAll extends Command
             try {
                 $fb->post("/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message], $user->token);
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                echo "Caught exception {$e->getMessage}.".PHP_EOL;
+                echo "Caught exception {$e->getMessage()}.".PHP_EOL;
             }
         }
     }
