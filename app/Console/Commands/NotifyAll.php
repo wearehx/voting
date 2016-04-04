@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use App\User;
-use Facebook\FacebookRequest;
-use Facebook\FacebookSession;
+use Facebook\Facebook;
 use Illuminate\Console\Command;
 
 class NotifyAll extends Command
@@ -34,11 +33,11 @@ class NotifyAll extends Command
         $message = $this->argument('message');
 
         $users = User::all();
+        
+        $fb = new Facebook();
 
         foreach ($users as $user) {
-            $request = new FacebookRequest(null, $user->token, 'POST', "/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message]);
-
-            $response = $request->execute();
+            $fb->post("/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message], $user->token);
         }
     }
 }
