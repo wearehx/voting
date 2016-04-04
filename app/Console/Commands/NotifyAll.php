@@ -36,9 +36,7 @@ class NotifyAll extends Command
         $users = User::all();
 
         foreach ($users as $user) {
-            $session = new FacebookSession($user->token);
-
-            $request = new FacebookRequest($session, 'POST', "/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message]);
+            $request = new FacebookRequest(null, $user->token, 'POST', "/{$user->facebook_id}/notifications", ['href' => $link, 'template' => $message]);
 
             $response = $request->execute();
         }
