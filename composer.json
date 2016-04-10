@@ -10,7 +10,8 @@
         "laravel/socialite": "^2.0",
         "facebook/php-sdk-v4": "^5.1",
         "doctrine/dbal": "^2.5",
-        "ramsey/uuid": "^3.0"
+        "ramsey/uuid": "^3.0",
+        "jenssegers/raven": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
