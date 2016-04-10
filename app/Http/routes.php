@@ -16,7 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::post('/', function () {
-        return redirect('/');
+        return redirect()->secure('/');
     });
 
     Route::get('logout', function () {
