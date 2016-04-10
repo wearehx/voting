@@ -123,7 +123,7 @@ class AuthController extends Controller
 
         Auth::loginUsingId($dbUser->id);
 
-        return redirect('/');
+        return redirect()->secure('/');
     }
 
     protected function validateUserFacebookAttributes($user)
