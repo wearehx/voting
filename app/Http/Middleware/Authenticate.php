@@ -41,7 +41,7 @@ class Authenticate
                 return response('Unauthorized.', 401);
             }
 
-            return redirect()->guest('auth/facebook');
+            return redirect()->guest('auth/facebook', 302, [], true);
         }
 
         return $next($request);
