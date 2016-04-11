@@ -33,7 +33,7 @@ class NotifyAll extends Command
         $message = $this->argument('message');
 
         $users = User::all();
-        
+
         $fb = new Facebook();
 
         foreach ($users as $user) {
