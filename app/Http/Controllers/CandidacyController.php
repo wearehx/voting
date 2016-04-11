@@ -33,17 +33,17 @@ class CandidacyController extends Controller
             'consent' => 'accepted',
             'text'    => 'required|max:250|min:10',
         ]);
-        
+
         if (!Auth::user()->canRun()) {
             abort(403);
         }
-        
+
         Candidate::create([
             'user_id' => Auth::user()->id,
             'about'   => $request->get('text'),
             'term_id' => nextTerm()->id,
         ]);
-        
+
         Session::flash('message', 'You successfully marked yourself as running.');
 
         return redirect('/');
