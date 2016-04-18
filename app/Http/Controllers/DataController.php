@@ -31,7 +31,7 @@ class DataController extends Controller
                 'id'         => $term,
                 'start'      => $term->starts_at->toDateString(),
                 'end'        => $term->ends_at->toDateString(),
-                'candidates' => $term->candidates()->join('users', 'users.id', '=', 'candidates.user_id')->select(['candidates.id AS candidate_id', 'users.id AS user_id', 'users.facebook_id', 'users.name '])->get(),
+                'candidates' => $term->candidates()->join('users', 'users.id', '=', 'candidates.user_id')->select(['candidates.id AS candidate_id', 'users.id AS user_id', 'users.facebook_id', 'users.name'])->get(),
                 'votes'      => $term->votes()->select(['id', 'candidate_id'])->get(),
             ];
         });
