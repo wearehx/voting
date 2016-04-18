@@ -32,7 +32,7 @@ class DataController extends Controller
                 'start'      => $term->starts_at->toDateString(),
                 'end'        => $term->ends_at->toDateString(),
                 'candidates' => $term->candidates()->select(['id', 'user_id'])->get(),
-                'votes'      => $term->votes()->select(['id', 'candidate_id', 'uuid'])->get(),
+                'votes'      => $term->votes()->select(['id', 'candidate_id'])->get(),
             ];
         });
 
