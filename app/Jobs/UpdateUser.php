@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\User;
+use Facebook\Exceptions\FacebookAuthenticationException;
+use Facebook\Facebook;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class UpdateUser extends Job implements SelfHandling
@@ -36,7 +38,9 @@ class UpdateUser extends Job implements SelfHandling
     public function __construct($uid, $changedFields)
     {
         $this->uid = $uid;
+        
         $this->changedFields = $changedFields;
+        
         $this->user = User::where('facebook_id', $this->uid)->get()->first();
     }
 
@@ -45,14 +49,20 @@ class UpdateUser extends Job implements SelfHandling
      *
      * @return void
      */
-    public function handle(\Facebook\Facebook $fb)
+    public function handle(Facebook $fb)
     {
-        $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
+        try {
+            $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
+        } catch (FacebookAuthenticationException $e) {
+            return false;    
+        }
+
         foreach ($response as $field => $value) {
             if (in_array($field, $this->changedFields)) {
                 $this->user->{$field} = $value;
             }
         }
+
         $this->user->save();
     }
 }
