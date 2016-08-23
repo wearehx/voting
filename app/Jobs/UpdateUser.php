@@ -5,9 +5,8 @@ namespace App\Jobs;
 use App\User;
 use Facebook\Exceptions\FacebookAuthenticationException;
 use Facebook\Facebook;
-use Illuminate\Contracts\Bus\SelfHandling;
 
-class UpdateUser extends Job implements SelfHandling
+class UpdateUser extends Job
 {
     /**
      * The Facebook UID of the user to update.
