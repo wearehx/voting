@@ -37,9 +37,9 @@ class UpdateUser extends Job
     public function __construct($uid, $changedFields)
     {
         $this->uid = $uid;
-        
+
         $this->changedFields = $changedFields;
-        
+
         $this->user = User::where('facebook_id', $this->uid)->get()->first();
     }
 
@@ -53,7 +53,7 @@ class UpdateUser extends Job
         try {
             $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
         } catch (FacebookAuthenticationException $e) {
-            return false;    
+            return false;
         }
 
         foreach ($response as $field => $value) {

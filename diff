@@ -1,0 +1,91 @@
+diff --git a/app/Jobs/UpdateUser.php b/app/Jobs/UpdateUser.php
+index 1879f625cca575bda3909970102cb6d8adc37931..21c23502b5ea78c4f940ff9ccbe280b134d0270b 100644
+--- a/app/Jobs/UpdateUser.php
++++ b/app/Jobs/UpdateUser.php
+@@ -37,9 +37,9 @@ class UpdateUser extends Job
+     public function __construct($uid, $changedFields)
+     {
+         $this->uid = $uid;
+-        
++
+         $this->changedFields = $changedFields;
+-        
++
+         $this->user = User::where('facebook_id', $this->uid)->get()->first();
+     }
+ 
+@@ -53,7 +53,7 @@ class UpdateUser extends Job
+         try {
+             $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
+         } catch (FacebookAuthenticationException $e) {
+-            return false;    
++            return false;
+         }
+ 
+         foreach ($response as $field => $value) {
+diff --git a/config/app.php b/config/app.php
+index c737073ae957f8e5c1024d992fc5865c7230bde7..5f1968a2c69209cfb6b89dc98984f15251b668e6 100644
+--- a/config/app.php
++++ b/config/app.php
+@@ -14,7 +14,7 @@ return [
+     */
+ 
+     'debug' => env('APP_DEBUG', false),
+-    
++
+     'env' => env('APP_ENV', 'production'),
+ 
+     /*
+diff --git a/config/auth.php b/config/auth.php
+index fcf03d7338d5fb06fbef30f6e11d99aaa2eec3d3..c678c87aa15fd0232f428fd4025d888aaf9f6197 100644
+--- a/config/auth.php
++++ b/config/auth.php
+@@ -14,7 +14,7 @@ return [
+     */
+ 
+     'defaults' => [
+-        'guard' => 'web',
++        'guard'     => 'web',
+         'passwords' => 'users',
+     ],
+ 
+@@ -37,12 +37,12 @@ return [
+ 
+     'guards' => [
+         'web' => [
+-            'driver' => 'session',
++            'driver'   => 'session',
+             'provider' => 'users',
+         ],
+ 
+         'api' => [
+-            'driver' => 'token',
++            'driver'   => 'token',
+             'provider' => 'users',
+         ],
+     ],
+@@ -67,7 +67,7 @@ return [
+     'providers' => [
+         'users' => [
+             'driver' => 'eloquent',
+-            'model' => App\User::class,
++            'model'  => App\User::class,
+         ],
+ 
+         // 'users' => [
+@@ -98,10 +98,10 @@ return [
+     'passwords' => [
+         'users' => [
+             'provider' => 'users',
+-            'email' => 'auth.emails.password',
+-            'table' => 'password_resets',
+-            'expire' => 60,
++            'email'    => 'auth.emails.password',
++            'table'    => 'password_resets',
++            'expire'   => 60,
+         ],
+     ],
+ 
+-];
+\ No newline at end of file
++];

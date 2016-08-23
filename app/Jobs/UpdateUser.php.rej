@@ -1,0 +1,23 @@
+--- app/Jobs/UpdateUser.php
++++ app/Jobs/UpdateUser.php
+@@ -37,9 +37,9 @@
+     public function __construct($uid, $changedFields)
+     {
+         $this->uid = $uid;
+-        
++
+         $this->changedFields = $changedFields;
+-        
++
+         $this->user = User::where('facebook_id', $this->uid)->get()->first();
+     }
+ 
+@@ -53,7 +53,7 @@
+         try {
+             $response = $fb->get('/me?fields='.implode($this->changedFields, ','), $this->user->token)->getGraphUser();
+         } catch (FacebookAuthenticationException $e) {
+-            return false;    
++            return false;
+         }
+ 
+         foreach ($response as $field => $value) {
