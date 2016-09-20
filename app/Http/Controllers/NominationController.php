@@ -67,6 +67,6 @@ class NominationController extends Controller
     protected static function notify(string $facebook_id)
     {
         $fb = new Facebook();
-        $fb->post("/{$facebook_id}/notifications", ['href' => 'https://hackers-voting.herokuapp.com/candidacy', 'template' => 'You have been nominated for the HX admin election. Click here to register yourself as a candidate.'], env('FACEBOOK_APP_ID').'|'.env('FACEBOOK_APP_SECRET'));
+        $fb->post("/{$facebook_id}/notifications", ['href' => 'https://hackers-voting.herokuapp.com/', 'template' => 'You have been nominated for the HX admin election. Click here to register yourself as a candidate.'], env('FACEBOOK_APP_ID').'|'.env('FACEBOOK_APP_SECRET'));
     }
 }
