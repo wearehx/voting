@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Nomination;
 use Auth;
+use Facebook\Facebook;
 use Illuminate\Http\Request;
 use Session;
 
@@ -31,6 +32,7 @@ class NominationController extends Controller
         $this->validate($request, [
             'facebook_id' => 'required|integer|exists:users,facebook_id|not_in:'.env('MAINTAINER_UID', '10153385491939685'),
         ]);
+
         if (Nomination::where([
             'facebook_id' => $request->get('facebook_id'),
             'term_id' => nextTerm()->id,
@@ -49,6 +51,7 @@ class NominationController extends Controller
 
             return redirect('/nominate');
         }
+
         Nomination::create([
             'facebook_id' => $request->get('facebook_id'),
             'user_id'     => Auth::user()->id,
@@ -56,6 +59,14 @@ class NominationController extends Controller
         ]);
         Session::flash('message', 'You successfully nominated a user.');
 
+        static::notify($request->get('facebook_id'));
+
         return redirect('/');
+    }
+
+    protected static function notify(string $facebook_id)
+    {
+        $fb = new Facebook();
+        $fb->post("/{$facebook_id}/notifications", ['href' => 'https://hackers-voting.herokuapp.com/candidacy', 'template' => 'You have been nominated for the HX admin election. Click here to register yourself as a candidate.'], env('FACEBOOK_APP_ID').'|'.env('FACEBOOK_APP_SECRET'));
     }
 }
