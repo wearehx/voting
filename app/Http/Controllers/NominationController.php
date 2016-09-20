@@ -51,7 +51,7 @@ class NominationController extends Controller
 
             return redirect('/nominate');
         }
-        
+
         Nomination::create([
             'facebook_id' => $request->get('facebook_id'),
             'user_id'     => Auth::user()->id,
@@ -63,7 +63,7 @@ class NominationController extends Controller
 
         return redirect('/');
     }
-    
+
     protected static function notify(string $facebook_id)
     {
         $fb = new Facebook();
